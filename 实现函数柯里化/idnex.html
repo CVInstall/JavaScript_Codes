@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function sum(a, b, c) {
+            return a + b + c;
+        }
+
+        // 第二版
+        // function sub_curry(fn) {
+        //     var args = [].slice.call(arguments, 1);
+        //     return function () {
+        //         return fn.apply(this, args.concat([].slice.call(arguments)));
+        //     };
+        // }
+
+        // function curry(fn, length) {
+        //     length = length || fn.length;
+
+        //     return function () {
+        //         if (arguments.length < length) {
+        //             var combined = [fn].concat([].slice.call(arguments));
+        //             return curry(sub_curry.apply(fn, combined), length - arguments.length);
+        //         } else {
+        //             return fn.apply(fn, arguments);
+        //         }
+        //     };
+        // }
+
+        function sub_curry(fn, params) {
+            return function () {
+                return fn.apply(this, params.concat([].slice.call(arguments)));
+            }
+        }
+
+        function curry(fn, length) {
+            var length = length || fn.length;
+            return function () {
+                if (arguments.length < length) {
+                    var combined = [].slice.call(arguments);
+                    return curry(sub_curry(fn, combined), length - arguments.length);
+                } else {
+                    return fn.apply(this, arguments);
+                }
+            }
+        }
+
+        var add = curry(sum);
+        console.log(add(1)(2)(3));
+    </script>
+</body>
+
+</html>

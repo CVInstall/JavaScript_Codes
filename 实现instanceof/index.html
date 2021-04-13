@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var new_instanceof = function (_left, _right) {
+            var leftProto = _left.prototype;    
+            var rightProto = _right.__proto__;
+            while (true) {
+                if (leftProto === null) {
+                    return false;
+                }
+
+                if (leftProto === rightProto) {
+                    return true;
+                }
+                rightProto = rightProto.__proto__;
+            }
+        }
+
+        console.log(new_instanceof(Object, Object));
+    </script>
+</body>
+
+</html>

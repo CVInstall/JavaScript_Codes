@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // call
+        Function.prototype._call = function (context) {
+            var context = context || window;
+            context.fn = this;
+            var args = [];
+            for (var i = 1, length = arguments.length; i < length; i++) {
+                args.push(arguments[i])
+            }
+            var res = eval('context.fn(' + args + ')');
+            delete context.fn;
+            return res;
+        }
+
+        var foo = function () {
+            console.log(this.name);
+        }
+
+        // apply
+        Function.prototype.apply = function (context, arr) {
+            var context = Object(context) || window;
+            context.fn = this;
+
+            var result;
+            if (!arr) {
+                result = context.fn();
+            } else {
+                var args = [];
+                for (var i = 0, len = arr.length; i < len; i++) {
+                    args.push('arr[' + i + ']');
+                }
+                result = eval('context.fn(' + args + ')')
+            }
+
+            delete context.fn
+            return result;
+        }
+    </script>
+</body>
+
+</html>

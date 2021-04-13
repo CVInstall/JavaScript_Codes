@@ -11,11 +11,32 @@
 
 <body>
     <script>
-        for (let i = 0; i < 6; i++) {
-            (function(){
-                
-            })()
+        Function.prototype._bind = function (context) {
+            if(this !== Function){
+                throw new Error("");
+            }
+            var self = this;
+            var args = [].slice.call(arguments, 1);
+
+            var fn = function(){
+                var new_args = [].slice.call(arguments);
+                return self.apply(this instanceof fn ? this : context, args.concat(new_args));
+            }
+            fn.prototype = self.prototype;
+            return fn;
         }
+
+        var bar = function (age, weight) {
+            console.log(this.name + age + weight);
+        }
+
+        var person = {
+            name: 'zack'
+        }
+
+        var say = bar._bind(person, 21);
+        say(55);
+
     </script>
 </body>
 

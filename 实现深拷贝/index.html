@@ -10,21 +10,60 @@
 
 <body>
     <script>
-        function clone(target, map = new WeakMap()) {
-            if (typeof target === 'object') {
-                var cloneTarget = Array.isArray(target) ? [] : {};
-                if (map.get(target)) {
-                    return target;
+        // function deepClone(target, map = new WeakMap()) {
+        //     if (typeof target === 'object') {
+        //         var cloneTarget = Array.isArray(target) ? [] : {};
+        //         if (map.get(target)) {
+        //             return target;
+        //         }
+        //         map.set(target, cloneTarget);
+        //         for (var key in target) {
+        //             cloneTarget[key] = deepClone(target, map);
+        //         }
+        //         return cloneTarget;
+        //     } else {
+        //         return target;
+        //     }
+        // };
+
+        function deepClone(target, map = new WeakMap()) {
+            // 利用 WeakMap 解决循环引用
+            let map = new WeakMap()
+            function deepClone(obj) {
+                if (obj instanceof Object) {
+                    if (map.has(obj)) {
+                        return map.get(obj)
+                    }
+                    let newObj
+                    if (obj instanceof Array) {
+                        newObj = []
+                    } else if (obj instanceof Function) {
+                        newObj = function () {
+                            return obj.apply(this, arguments)
+                        }
+                    } else if (obj instanceof RegExp) {
+                        // 拼接正则
+                        newobj = new RegExp(obj.source, obj.flags)
+                    } else if (obj instanceof Date) {
+                        newobj = new Date(obj)
+                    } else {
+                        newObj = {}
+                    }
+                    // 克隆一份对象出来
+                    let desc = Object.getOwnPropertyDescriptors(obj)
+                    let clone = Object.create(Object.getPrototypeOf(obj), desc)
+                    map.set(obj, clone)
+                    for (let key in obj) {
+                        if (obj.hasOwnProperty(key)) {
+                            newObj[key] = deepClone(obj[key])
+                        }
+                    }
+                    return newObj
                 }
-                map.set(target, cloneTarget);
-                for (var key in target) {
-                    cloneTarget[key] = clone(target, map);
-                }
-                return cloneTarget;
-            } else {
-                return target;
+                return obj
             }
-        };
+
+        }
 
         const target = {
             field1: 1,
@@ -36,7 +75,7 @@
         };
         target.target = target;
 
-        var res = clone(target);
+        var res = deepClone(target);
         console.log(res);
     </script>
 </body>

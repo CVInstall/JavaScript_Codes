@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let a = 9007199254740991;
+        let b = 1234567899999999999;
+
+        function addBigInt(a, b) {
+            let astr = a.toString();
+            let bstr = b.toString();
+            let maxLength = Math.max(astr.length, bstr.length);
+
+            astr = astr.padStart(maxLength, '0');
+            bstr = bstr.padStart(maxLength, '0');
+
+            let unit = 0;
+            let cb = 0;
+            let sum = '';
+            for (var i = maxLength - 1; i >= 0; i--) {
+                let num = parseInt(astr[i]) + parseInt(bstr[i]) + cb;
+                cb = Math.floor(num / 10);
+                sum = num % 10 + sum;
+            }
+
+            if (cb == 1) {
+                sum = '1' + sum;
+            }
+            return sum;
+
+        }
+        console.log(addBigInt(a, b));
+    </script>
+</body>
+
+</html>

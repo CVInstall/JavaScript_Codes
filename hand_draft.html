@@ -11,15 +11,16 @@
 
 <body>
     <script>
-        var obj = {
-            name: 'zack',
-            say: function () {
-                console.log(this.name);
+        function trottle(fn, wait) {
+
+            return function () {
+                let context = this;  
+                let now = new Date();
+                if (new Date() - now > wait) {
+                    fn.apply(context, arguments);
+                }
             }
         }
-
-        var fn = obj.say.bind(obj);
-        fn();
     </script>
 </body>
 

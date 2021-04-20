@@ -15,50 +15,57 @@
                 this.state = 'pending';
                 this.value = undefined;
                 this.reason = undefined;
-                // 成功存放的数组
-                this.onResolvedCallbacks = [];
-                // 失败存放法数组
-                this.onRejectedCallbacks = [];
-                let resolve = value => {
+                this.fulfilledCallbacks = [];
+                this.rejectedCallbacks = [];
+
+                let resolve = (value) => {
                     if (this.state === 'pending') {
-                        this.state = 'fulfilled';
                         this.value = value;
-                        // 一旦resolve执行，调用成功数组的函数
-                        this.onResolvedCallbacks.forEach(fn => fn());
+                        this.state = 'fulfilled';
+                        this.fulfilledCallbacks.forEach(fn => fn());
                     }
-                };
-                let reject = reason => {
+                }
+
+                let reject = (reason) => {
                     if (this.state === 'pending') {
-                        this.state = 'rejected';
                         this.reason = reason;
-                        // 一旦reject执行，调用失败数组的函数
-                        this.onRejectedCallbacks.forEach(fn => fn());
+                        this.state = 'rejected';
+                        this.rejectedCallbacks.forEach(fn => fn());
                     }
-                };
+                }
+
                 try {
                     executor(resolve, reject);
-                } catch (err) {
-                    reject(err);
+                } catch (e) {
+                    reject(e);
                 }
             }
+
             then(onFulfilled, onRejected) {
-                if (this.state === 'fulfilled') {
-                    onFulfilled(this.value);
-                };
-                if (this.state === 'rejected') {
-                    onRejected(this.reason);
-                };
-                // 当状态state为pending时
-                if (this.state === 'pending') {
-                    // onFulfilled传入到成功数组
-                    this.onResolvedCallbacks.push(() => {
-                        onFulfilled(this.value);
-                    })
-                    // onRejected传入到失败数组
-                    this.onRejectedCallbacks.push(() => {
-                        onRejected(this.reason);
-                    })
-                }
+                let promise2 = new Promise((resolve, reject) => {
+                    if (this.state === 'fulfilled') {
+                        let x = onFulfilled(this.value);
+                        resolvePromise(promise2, x, resolve, reject);
+                    }
+
+                    if (this.state === 'rejected') {
+                        let x = onRejected(this.reason);
+                        resolvePromise(promise2, x, resolve, reject);
+                    }
+
+                    if (this.state === 'pending') {
+                        this.fulfilledCallbacks.push(() => {
+                            let x = onFulfilled(this.value);
+                            resolvePromise(promise2, x, resolve, reject);
+                        })
+
+                        this.rejectedCallbacks.push(() => {
+                            let x = onRejected(this.reason);
+                            resolvePromise(promise2, x, resolve, reject);
+                        })
+                    }
+
+                    return promise2;
             }
         }
 

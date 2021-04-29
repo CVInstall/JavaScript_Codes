@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实现回文数的判定</title>
+</head>
+
+<body>
+    <script>
+        function isHw(number) {
+            let leftnumber = number;
+            let rightnumber = 0;
+
+            if (leftnumber < 0 || (leftnumber % 10 === 0 && leftnumber !== 0)) {
+                return false;
+            } else {
+                while (leftnumber > rightnumber) {
+                    rightnumber = rightnumber * 10 + leftnumber % 10;
+                    leftnumber = Math.floor(leftnumber / 10);
+                }
+
+                if (leftnumber === rightnumber || leftnumber === Math.floor(rightnumber / 10)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
+
+        // function isHw(number) {
+        //     let leftnumber = number;
+        //     let rightnumber = 0;
+
+        //     if (leftnumber < 0 || (leftnumber % 10 === 0 && leftnumber !== 0)) {
+        //         return false;
+        //     } else {
+        //         while (leftnumber > 0) {
+        //             rightnumber = rightnumber * 10 + leftnumber % 10;
+        //             leftnumber = Math.floor(leftnumber / 10);
+        //         }
+        //         return rightnumber === number;
+        //     }
+        // }
+
+        console.log(isHw(234321));
+    </script>
+</body>
+
+</html>

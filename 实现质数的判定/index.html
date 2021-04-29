@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>判断是否是质数</title>
+</head>
+
+<body>
+    <script>
+        // 方法1
+        function isZS_1(num) {
+            if (num < 2) {
+                return false;
+            }
+            for (let i = 2; i < num; i++) {
+                if (num % i === 0) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        console.log(isZS_1(12));
+
+        // 方法2
+        function isZS_2(num) {
+            if (num < 2) {
+                return false;
+            }
+            let middle = Math.sqrt(num);
+            for (let i = 2; i < middle; i++) {
+                if (num % i === 0) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        console.log(isZS_2(3))
+
+        // 方法3
+        function isZS_3(num) {
+            // 两个较小数另外处理
+            if (num == 2 || num == 3) {
+                return 1;
+            }
+            //不在6的倍数两侧的一定不是质数
+            if (num % 6 != 1 && num % 6 != 5) {
+                return 0;
+            }
+            let tmp = sqrt(num);
+            //在6的倍数两侧的也可能不是质数
+            for (let i = 5; i <= tmp; i += 6) {
+                if (num % i == 0 || num % (i + 2) == 0) {
+                    return 0;
+                }
+            }
+            //排除所有，剩余的是质数
+            return 1;
+        }
+
+        console.log(isZS_3(7))
+    </script>
+</body>
+
+</html>

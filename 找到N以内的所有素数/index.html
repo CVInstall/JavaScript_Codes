@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function searchZhiShu(num) {
+            if (num < 1) {
+                alert("输入的数字必须大于1");
+            }
+            let res = [];
+            for (let j = 2; j <= num; j++) {
+                if (j === 2 || j === 3) {
+                    res.push(j);
+                    continue;
+                }
+                if (j % 6 !== 1 && j % 6 !== 5) {
+                    continue;
+                }
+                let middle = Math.sqrt(j);
+                let iszs = true;
+                for (let i = 5; i <= middle; i += 6) {
+                    if (j % i === 0 || j % (i + 2) === 0) {
+                        iszs = false;
+                        break;
+                    }
+                }
+                if (iszs) {
+                    res.push(j);
+                }
+            }
+            return res;
+        }
+
+        console.log(searchZhiShu(100));
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // index.js
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('./sw.js').then(function () {
+                // 注册成功
+            });
+        }
+
+        // sw.js
+        self.addEventListener('fetch', function (e) {
+            // 如果有cache则直接返回，否则通过fetch请求
+            e.respondWith(
+                caches.match(e.request).then(function (cache) {
+                    return cache || fetch(e.request);
+                }).catch(function (err) {
+                    console.log(err);
+                    return fetch(e.request);
+                })
+            );
+        });
+    </script>
+</body>
+
+</html>

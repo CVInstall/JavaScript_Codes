@@ -11,11 +11,14 @@
 <body>
     <script>
         function _new() {
-            var obj = new Object();
+            var obj = Object.create(null);
             var _constructor = Array.prototype.shift.call(arguments);
             obj.__proto__ = _constructor.prototype;
             var ret = _constructor.apply(obj, arguments);
-            return typeof ret === 'object' ? ret : obj;
+            return typeof ret === 'ob
+
+
+            、ject' ? ret : obj;
         }
 
         function people(){

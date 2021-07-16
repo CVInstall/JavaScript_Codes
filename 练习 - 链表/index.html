@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+</head>
+
+<body>
+    <script>
+        let Node = function (element) {
+            this.element = element;
+            this.next = null;
+        }
+
+        class NodeList {
+            constructor() {
+                this.head = null;
+                this.length = 0;
+            }
+
+            getElementAt(position) {
+                if (position < 0 || position > this.length) {
+                    return null;
+                }
+                let current = this.head;
+                for (let i = 0; i < position; i++) {
+                    current = current.next;
+                }
+
+                return current;
+            }
+
+            append(element) {
+                let node = new Node(element);
+                if (this.head = null) {
+                    this.head = node;
+                } else {
+                    let current = this.getElementAt(this.length - 1);
+                    current.next = node;
+                }
+                node.next = null;
+                this.length++;
+            }
+
+            insert(position, element) {
+                if (position < 0 || position > this.length) {
+                    return false;
+                }
+                let node = new Node(element);
+                if (position === 0) {
+                    node.next = this.head;
+                    this.head = node;
+                } else {
+                    let previous = this.getElementAt(position - 1);
+                    node.next = previous.next;
+                    previous.next = node;
+                }
+                this.length++;
+                return true;
+            }
+
+            removeAt(position) {
+                if (position < 0 || position > this.length) {
+                    return false;
+                }
+                let previous = this.getElementAt(position - 1);
+                let nextNode = this.getElementAt(position + 1);
+                previous.next = nextNode;
+            }
+        }
+    </script>
+</body>
+
+</html>

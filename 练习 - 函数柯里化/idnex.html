@@ -53,6 +53,21 @@
             }
         }
 
+        function curry2(fn, args) {
+            let length = fn.length;
+            args = args || [];
+
+            return function () {
+                let _args = args.concat([].slice.call(arguments));
+                if (_args.length < length) {
+                    return curry(fn, _args);
+                } else {
+                    return fn.apply(this, _args)
+                }
+            }
+        }
+
+
         var add = curry(sum);
         console.log(add(1)(2)(3));
     </script>

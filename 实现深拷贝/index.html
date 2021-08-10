@@ -10,22 +10,6 @@
 
 <body>
     <script>
-        // function deepClone(target, map = new WeakMap()) {
-        //     if (typeof target === 'object') {
-        //         var cloneTarget = Array.isArray(target) ? [] : {};
-        //         if (map.get(target)) {
-        //             return target;
-        //         }
-        //         map.set(target, cloneTarget);
-        //         for (var key in target) {
-        //             cloneTarget[key] = deepClone(target, map);
-        //         }
-        //         return cloneTarget;
-        //     } else {
-        //         return target;
-        //     }
-        // };
-
         // 利用 WeakMap 解决循环引用
         let map = new WeakMap()
         function deepClone(obj) {
@@ -49,13 +33,14 @@
                     newObj = {}
                 }
                 // 克隆一份对象出来
-                let desc = Object.getOwnPropertyDescriptors(obj)
-                let clone = Object.create(Object.getPrototypeOf(obj), desc)
-                map.set(obj, clone)
+                // let desc = Object.getOwnPropertyDescriptors(obj)
+                // let clone = Object.create(Object.getPrototypeOf(obj), desc)
+
+                map.set(obj, newObj)
                 for (let key in obj) {
-                    if (obj.hasOwnProperty(key)) {
-                        newObj[key] = deepClone(obj[key])
-                    }
+                    // if (obj.hasOwnProperty(key)) {
+                    newObj[key] = deepClone(obj[key])
+                    // }
                 }
                 return newObj
             }

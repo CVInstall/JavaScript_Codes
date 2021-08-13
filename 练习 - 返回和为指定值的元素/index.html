@@ -1,0 +1,41 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-08-13 17:01:22
+ * @LastEditTime: 2021-08-13 17:07:10
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \JavaScript_Codes\练习 - 返回和为指定值的元素\index.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function getSum(arr, sum) {
+            if (arr == '' || arr.length == 0) {
+                return false;
+            }
+            var left = 0, right = arr.length - 1;
+            while (left < right) {
+                if (arr[left] + arr[right] > sum) {
+                    right--;
+                } else if (arr[left] + arr[right] < sum) {
+                    left++;
+                } else {
+                    console.log(arr[left] + " + " + arr[right] + " = " + sum);
+                    left++;
+                    right--;
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

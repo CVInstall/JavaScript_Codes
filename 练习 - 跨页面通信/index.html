@@ -10,7 +10,7 @@
 
 <body>
     <script>
-        // 广播通信
+        // 【广播通信】
         // 接受端
         let bc = new BroadcastChannel("name");
         bc.onmessage = function (e) {
@@ -19,8 +19,8 @@
         // 推送端
         let bc = new BroadcastChannel("name");
         bc.postMessage(data);
-
-        // ServiceWorker
+/**************************************************************************************************************/
+        // 【ServiceWorker】
         // com.js
         self.addEventListener("message", function (e) {
             console.log("........");
@@ -36,32 +36,27 @@
                 })
             )
         })
-
         // 页面注册serviceworker
         navigator.serviceworker.register("./com.js").then(() => {
             console.log("...");
         })
-
         // 页面监听
         navigator.serviceWorker.addEventListener("message", function (e) {
-
         })
-
         // 同步信息
         navigator.serviceWorker.controller.postMessage(data);
-
-        // localStorage
+/**************************************************************************************************************/
+        // 【localStorage】
         // 接受方
         Window.addEventListener("storage", e => {
 
         })
         // 发送方
         window.localStorage.setItem("", value)
-
-        // sharedworker
+/**************************************************************************************************************/
+        // 【sharedworker】
         // 注册sharedworker
         const sharedworker = new SharedWorker("../share.js", "name");
-
         // share.js
         self.addEventListener("connect", e => {
             const port = e.ports[0];

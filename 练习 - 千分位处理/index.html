@@ -29,6 +29,27 @@
             return res;
         }
 
+        // self
+        function spreadStr(str) {
+            str = str.toString().split(".");
+            let res = '';
+            let len = str[0].length;
+            let counter = 1;
+
+            for (let i = len - 1; i >= 0; --i) {
+                res = str[0][i] + res;
+                if (counter % 3 === 0 && counter != len) {
+                    res = ',' + res;
+                }
+                counter++;
+            }
+
+            if (str[1]) {
+                res = res + "." + str[1];
+            }
+            return res;
+        }
+
         var a = 1234567894532;
         var b = 673439.4542;
         console.log(numFormat(a)); // "1,234,567,894,532"

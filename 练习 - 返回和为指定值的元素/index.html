@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-08-13 17:01:22
- * @LastEditTime: 2021-08-13 17:07:10
+ * @LastEditTime: 2021-08-21 17:59:42
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \JavaScript_Codes\练习 - 返回和为指定值的元素\index.html
@@ -35,6 +35,19 @@
                 }
             }
         }
+
+        // 哈希表
+        var twoSum = function (nums, target) {
+            let map = new Map();
+            for (let i = 0, len = nums.length; i < len; i++) {
+                let another = target - nums[i];
+                if (map.has(another)) {
+                    return [map.get(another), i];
+                } else {
+                    map.set(nums[i], i);
+                }
+            }
+        };
     </script>
 </body>
 

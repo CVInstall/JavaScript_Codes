@@ -15,10 +15,7 @@
             var _constructor = Array.prototype.shift.call(arguments);
             obj.__proto__ = _constructor.prototype;
             var ret = _constructor.apply(obj, arguments);
-            return typeof ret === 'ob
-
-
-            、ject' ? ret : obj;
+            return typeof ret === 'object' ? ret : obj;
         }
 
         function people(){

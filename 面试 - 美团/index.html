@@ -1,0 +1,53 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-08-21 22:31:17
+ * @LastEditTime: 2021-08-21 22:31:28
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \JavaScript_Codes\面试 - 美团\index.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var romanToInt = function (source, target) {
+            let sArray = "";
+            let tArray = "";
+            for (let i = 0, len = source.length; i < len; i++) {
+                if (i + 1 !== len && source[i] !== source[i + 1]) {
+                    sArray += source[i];
+                }
+                continue;
+            }
+
+            for (let j = 0, len = target.length; j < len; j++) {
+                if (j + 1 !== len && target[j] !== target[j + 1]) {
+                    tArray += target[j];
+                }
+                continue;
+            }
+
+            for (let k = 0, len = sArray.length; k < len; k++) {
+                if (sArray[k] !== tArray[k]) {
+                    return false;
+                }
+            }
+            return true
+        };
+
+        console.log(romanToInt("abc", "aaccbb"));
+        console.log(romanToInt("abc", "aabbccddd"));
+        console.log(romanToInt("abc", "aabbccdddaabbcc"));
+        console.log(romanToInt("abcd", "aabbccdddaabbcc"));
+    </script>
+</body>
+
+</html>

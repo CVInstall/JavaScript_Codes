@@ -1,0 +1,73 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-08-26 23:12:41
+ * @LastEditTime: 2021-08-26 23:12:54
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \JavaScript_Codes\面试 - 华为\index1.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function findStr(strArray) {
+            let len = strArray.length;
+            let tmp_array = [];
+            let res = [];
+
+            for (let i = 0; i < len; i++) {
+                tmp_array[i] = strArray[i].split("");
+            }
+
+            let firt_str = tmp_array.shift();
+            for (let i = 0, len = firt_str.length; i < len; i++) {
+                let count = 0;
+                for (let j = 0, tmp_len = tmp_array.length; j < tmp_len; j++) {
+                    if (tmp_array[j].indexOf(firt_str[i]) >= 0) { //
+                        count++;
+                        if (count === tmp_len) {
+                            if (res.indexOf(firt_str[i]) >= 0) {
+                                let str_counter = 0;
+                                firt_str.forEach(function (item) {
+                                    if (item === firt_str[i]) {
+                                        str_counter++;
+                                    }
+                                })
+                                let isTrue = true;
+                                for (let k = tmp_len - 1; k >= 0; k--) {
+                                    let inner_tmp_array = tmp_array[k].filter(item => {
+                                        return item === firt_str[i];
+                                    })
+                                    if (inner_tmp_array.length !== str_counter || inner_tmp_array.length > str_counter) {
+                                        isTrue = false;
+                                    }
+                                }
+                                if (isTrue) {
+                                    res.push(firt_str[i]);
+                                }
+                            } else {
+                                res.push(firt_str[i]);
+                            }
+                        }
+                    } else {
+                        continue;
+                    }
+                }
+            }
+            return res;
+        }
+
+        console.log(findStr(["bella", "label", "roller"]));
+        // console.log(findStr(["cool", "lock", "cook"]));
+    </script>
+</body>
+
+</html>

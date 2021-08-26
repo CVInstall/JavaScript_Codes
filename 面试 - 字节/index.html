@@ -1,0 +1,63 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-08-26 15:15:17
+ * @LastEditTime: 2021-08-26 15:15:18
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \JavaScript_Codes\面试 - 字节\index.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        Array.prototype.getReader = function () {
+            let array_read = this;
+            let tmpArray = [...array_read];
+            let obj = {};
+
+            obj.read = function (num) {
+                if (num === undefined) {
+                    num = 1;
+                } else if (Object.prototype.toString.call(num) !== "[object Number]" || num <= 0) {
+                    return false;
+                } else {
+                    let str = num.toString().split(".");
+                    if (str[1]) {
+                        return false;
+                    }
+
+                    if (tmpArray.length === 0) {
+                        return [];
+                    }
+                }
+                let res = tmpArray.slice(0, num);
+                tmpArray = tmpArray.splice(num);
+                return res;
+            }
+
+            return obj;
+        }
+
+        let array = [1, 2, 3, 4, 5, 6];
+        let reader = array.getReader();
+        console.log(reader.read("1"));
+        console.log(reader.read(-1));
+        console.log(reader.read(1.5));
+        console.log(reader.read());
+        console.log(reader.read(1));
+        console.log(reader.read(2));
+        console.log(reader.read(3));
+        console.log(reader.read());
+        console.log(array);
+    </script>
+</body>
+
+</html>

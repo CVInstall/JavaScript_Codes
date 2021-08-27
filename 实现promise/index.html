@@ -140,6 +140,29 @@
                 };
             })
         }
+
+        function promiseRace(promise) {
+            if (!Array.isArray(promises)) {
+                throw new Error("promises must be an array!!!");
+
+            }
+            let resolved = false;
+            return new Promise(function (resolve, reject) {
+                try {
+                    promises.forEach(p =>
+                        p.then(data => {
+                            if (!resolved) {
+                                resolved = true;
+                                resolve(data);
+                            }
+                        })
+                    )
+                } catch (error) {
+                    reject(error);
+                }
+            })
+        }
+
         //all方法(获取所有的promise，都执行then，把结果放到数组，一起返回)
         Promise.all = function (promises) {
             let arr = [];
@@ -158,6 +181,30 @@
                     }, reject);
                 };
             });
+        }
+
+        function promiseAll(promises) {
+            if (!Array.isArray(promises)) {
+                throw new Error("promises must to be an array!!!");
+            }
+            return new Promise(function (resolve, reject) {
+                // let resolvedCount = 0;
+                let len = promises.length;
+                let res = [];
+
+                try {
+                    for (let i = 0; i < len; i++) {
+                        promises[i].then(function (value) {
+                            res[i] = value;
+                            if (++i === len) {
+                                resolve(res);
+                            }
+                        })
+                    }
+                } catch (error) {
+                    reject(error);
+                }
+            })
         }
 
     </script>

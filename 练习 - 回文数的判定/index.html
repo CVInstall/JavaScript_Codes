@@ -22,29 +22,9 @@
                     leftnumber = Math.floor(leftnumber / 10);
                 }
 
-                if (leftnumber === rightnumber || leftnumber === Math.floor(rightnumber / 10)) {
-                    return true;
-                } else {
-                    return false;
-                }
+                return leftnumber === rightnumber || leftnumber === Math.floor(rightnumber / 10);
             }
         }
-
-        // function isHw(number) {
-        //     let leftnumber = number;
-        //     let rightnumber = 0;
-
-        //     if (leftnumber < 0 || (leftnumber % 10 === 0 && leftnumber !== 0)) {
-        //         return false;
-        //     } else {
-        //         while (leftnumber > 0) {
-        //             rightnumber = rightnumber * 10 + leftnumber % 10;
-        //             leftnumber = Math.floor(leftnumber / 10);
-        //         }
-        //         return rightnumber === number;
-        //     }
-        // }
-
         console.log(isHw(234321));
     </script>
 </body>

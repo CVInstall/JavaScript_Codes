@@ -10,31 +10,6 @@
 
 <body>
     <script>
-        function sum(a, b, c) {
-            return a + b + c;
-        }
-
-        // 第二版
-        // function sub_curry(fn) {
-        //     var args = [].slice.call(arguments, 1);
-        //     return function () {
-        //         return fn.apply(this, args.concat([].slice.call(arguments)));
-        //     };
-        // }
-
-        // function curry(fn, length) {
-        //     length = length || fn.length;
-
-        //     return function () {
-        //         if (arguments.length < length) {
-        //             var combined = [fn].concat([].slice.call(arguments));
-        //             return curry(sub_curry.apply(fn, combined), length - arguments.length);
-        //         } else {
-        //             return fn.apply(fn, arguments);
-        //         }
-        //     };
-        // }
-
         function sub_curry(fn, params) {
             return function () {
                 return fn.apply(this, params.concat([].slice.call(arguments)));
@@ -67,9 +42,31 @@
             }
         }
 
+        function curry3(fn, length) {
+            let len = length || fn.length;
+
+            return function () {
+                if (arguments.length < len) {
+                    let args = [].slice.call(arguments);
+                    return curry(function () {
+                        let bindArgs = args.concat([].slice.call(arguments));
+                        return fn.apply(this, bindArgs);
+                    }, len - arguments.length);
+                } else {
+                    return fn.apply(this, arguments);
+                }
+            }
+        }
+
+        function sum(a, b, c) {
+            return a + b + c;
+        }
 
         var add = curry(sum);
         console.log(add(1)(2)(3));
+        console.log(add(1, 2, 3));
+        console.log(add(1, 2)(3));
+        console.log(add(1)(2, 3));
     </script>
 </body>
 

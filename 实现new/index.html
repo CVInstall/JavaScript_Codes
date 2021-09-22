@@ -12,7 +12,7 @@
     <script>
         function _new() {
             var obj = Object.create(null);
-            var _constructor = Array.prototype.shift.call(arguments);
+            var _constructor = [].shift.call(arguments);
             obj.__proto__ = _constructor.prototype;
             var ret = _constructor.apply(obj, arguments);
             return typeof ret === 'object' ? ret : obj;

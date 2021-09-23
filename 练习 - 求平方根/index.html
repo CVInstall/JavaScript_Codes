@@ -11,7 +11,7 @@
 <body>
     <script>
         // 二分法
-        function sqrt_number(number) {
+        function sqrt_number(x) {
             if (x < 2) return x
             let left = 1, mid, right = Math.floor(x / 2);
             while (left <= right) {
@@ -40,7 +40,7 @@
         function sqrtNumber(x) {
             let res = (x + numer / x) / 2;
             if (Math.floor(res) === Math.floor(x)) {
-                return Math.floor(x);
+                return Math.floor(res);
             } else {
                 return sqrtNumber(res);
             }

@@ -141,24 +141,19 @@
             })
         }
 
-        function promiseRace(promise) {
-            if (!Array.isArray(promises)) {
+        Promise.race = function (promises) {
+            if (Array.isArray(promises)) {
                 throw new Error("promises must be an array!!!");
-
             }
-            let resolved = false;
-            return new Promise(function (resolve, reject) {
-                try {
-                    promises.forEach(p =>
-                        p.then(data => {
-                            if (!resolved) {
-                                resolved = true;
-                                resolve(data);
-                            }
-                        })
-                    )
-                } catch (error) {
-                    reject(error);
+
+            return new Promises((resolve, reject) => {
+                for (let i = 0, len = promises.length; i < len; ++i) {
+
+                    Promise.resolve(promises[i].then(value => {
+                        resolve(value)
+                    }, e => {
+                        reject(e);
+                    }))
                 }
             })
         }
@@ -191,12 +186,13 @@
                 // let resolvedCount = 0;
                 let len = promises.length;
                 let res = [];
-
+                let counter = 0
                 try {
-                    for (let i = 0; i < len; i++) {
+                    for (let i = 0; i < len; ++i) {
+                        ++counter;
                         promises[i].then(function (value) {
                             res[i] = value;
-                            if (++i === len) {
+                            if (counter === len) {
                                 resolve(res);
                             }
                         })

@@ -1,0 +1,41 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-09-28 10:53:22
+ * @LastEditTime: 2021-09-28 10:53:22
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \JavaScript_Codes\练习 - 用setTimeout模拟setInterval\index.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function mySetInterval(fn, time = 1000) {
+            let timer = null, isClear = false;
+
+            function interval() {
+                if (isClear) {
+                    isClear = false;
+                    clearTimeout(timer);
+                    return;
+                }
+                fn();
+                timer = setTimeout(interval, time);
+            }
+            timer = setTimeout(interval, time);
+            return () => {
+                isClear = true;
+            };
+        }
+    </script>
+</body>
+
+</html>

@@ -186,13 +186,11 @@
                 // let resolvedCount = 0;
                 let len = promises.length;
                 let res = [];
-                let counter = 0
                 try {
                     for (let i = 0; i < len; ++i) {
-                        ++counter;
                         promises[i].then(function (value) {
                             res[i] = value;
-                            if (counter === len) {
+                            if ((i + 1) === len) {
                                 resolve(res);
                             }
                         })

@@ -21,8 +21,8 @@
 
         // 尾递归优化
         function fib_1_pro(n, current = 0, next = 1) {
-            if (n === 1) return next;
             if (n === 0) return 0;
+            if (n === 1) return next;
             return fib_1_pro(n - 1, next, current + next);
         }
 

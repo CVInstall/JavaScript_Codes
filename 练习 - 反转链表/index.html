@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-08-13 16:08:40
- * @LastEditTime: 2021-08-13 16:35:25
+ * @LastEditTime: 2021-10-06 22:20:15
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \JavaScript_Codes\练习-反转链表\index.html
@@ -19,16 +19,16 @@
 <body>
     <script>
         var reverseList = function (head) {
-            let prev = null;
-            let curr = head;
+            let pre = null;
+            let cur = head;
 
-            while (curr) {
-                const next = curr.next; // 原先链表的下一个节点
-                curr.next = prev; // 反转
-                prev = curr; // 保存反转后的链表
-                curr = next; // 原先链表的新遍历节点
+            while (cur) {
+                const next = cur.next; // 原先链表的下一个节点
+                cur.next = pre; // 反转
+                pre = cur; // 保存反转后的链表
+                cur = next; // 原先链表的新遍历节点
             }
-            return prev;
+            return pre;
         };
     </script>
 </body>

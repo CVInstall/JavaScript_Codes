@@ -13,20 +13,20 @@
         }
 
         .a {
-            /* box-sizing: border-box; */
+            box-sizing: border-box;
             width: 500px;
             height: 500px;
             position: relative;
             margin-left: 100px;
-            border-left: 100px solid transparent;
+            border-left: 100px solid yellow;
             padding-left: 100px;
             background-color: chartreuse;
         }
 
         .b {
-            width: 100px;
-            height: 100px;
-            background-color: #000;
+            width: 200px;
+            height: 200px;
+            background-color: red;
             position: absolute;
             left: 0;
             top: 0;
@@ -37,6 +37,8 @@
 <body>
     <!-- b盒子距离屏幕边缘的距离多少像素 -->
     <div class="a">
+        <p>123</p>
+        <p>456</p>
         <div class="b"></div>
     </div>
 </body>

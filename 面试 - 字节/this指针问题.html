@@ -1,0 +1,42 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-10-12 09:49:45
+ * @LastEditTime: 2021-10-12 09:49:54
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \JavaScript_Codes\面试 - 字节\this指针问题.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var str = "outer";
+        var test = {
+            commonFn: function () {
+                console.log(this.str);
+            },
+            arrowFn: () => {
+                console.log(this.str);
+            },
+            str: "inner"
+        }
+        test.commonFn();
+        test.arrowFn();
+        test.arrowFn.bind(str)();
+
+        var fn1 = test.commonFn;
+        var fn2 = test.arrowFn;
+        fn1();
+        fn2();
+    </script>
+</body>
+
+</html>

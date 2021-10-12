@@ -183,9 +183,9 @@
                 throw new Error("promises must to be an array!!!");
             }
             return new Promise(function (resolve, reject) {
-                // let resolvedCount = 0;
                 let len = promises.length;
                 let res = [];
+
                 try {
                     for (let i = 0; i < len; ++i) {
                         promises[i].then(function (value) {
@@ -193,6 +193,8 @@
                             if ((i + 1) === len) {
                                 resolve(res);
                             }
+                        }, function (reason) {
+                            reject(reason);
                         })
                     }
                 } catch (error) {

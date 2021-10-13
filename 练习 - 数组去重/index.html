@@ -1,0 +1,31 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-10-13 14:56:54
+ * @LastEditTime: 2021-10-13 14:56:54
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \JavaScript_Codes\练习 - 数组去重\index.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let array = [1, 1, 2, 3, 4, [1, 2], [1, 2], [1, 2, 3],{ a: 1 }, { a: 1 }, { b: 1 }];
+        let obj = {};
+        array = array.filter((item, index, array) => {
+            return obj[typeof item + JSON.stringify(item)] ? false : obj[typeof item + JSON.stringify(item)] = true;
+        })
+
+        console.log(array);
+    </script>
+</body>
+
+</html>

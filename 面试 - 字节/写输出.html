@@ -1,0 +1,63 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-10-14 19:03:34
+ * @LastEditTime: 2021-10-14 19:04:53
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \JavaScript_Codes\面试 - 字节\写输出.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var a = function () {
+            this.b = 3;
+        }
+        a.prototype.say = function () {
+            console.log(this.b);
+        }
+        var c = new a();
+        a.prototype.b = 9;
+        a();
+        var b = 7;
+
+        console.log(b);
+        console.log(c.b);
+        a.prototype.say();
+        c.say();
+        var says = a.prototype.say;
+        says();
+        console.log(a.prototype.b);
+
+    // ----------------------------------------------------------------------------
+
+        function test(a, b) {
+            console.log(b)
+            return {
+                test: function (c) {
+                    return test(c, a);
+                }
+            };
+        }
+
+        var retA = test(0);
+        retA.test(2);
+        retA.test(4);
+        retA.test(8);
+        var retB = test(0).test(2).test(4).test(8);
+        var retC = test('good').test('bad');
+        retC.test('good');
+        retC.test('bad');
+
+    </script>
+</body>
+
+</html>

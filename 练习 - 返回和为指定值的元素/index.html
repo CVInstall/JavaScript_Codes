@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-08-13 17:01:22
- * @LastEditTime: 2021-08-21 17:59:42
+ * @LastEditTime: 2021-11-02 08:52:53
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \JavaScript_Codes\练习 - 返回和为指定值的元素\index.html
@@ -42,9 +42,9 @@
             for (let i = 0, len = nums.length; i < len; i++) {
                 let another = target - nums[i];
                 if (map.has(another)) {
-                    return [map.get(another), i];
+                    return [map.get(another), nums[i]];
                 } else {
-                    map.set(nums[i], i);
+                    map.set(nums[i], nums[i]);
                 }
             }
         };

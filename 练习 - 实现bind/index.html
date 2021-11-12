@@ -21,7 +21,7 @@
                 var bindArgs = Array.prototype.slice.call(arguments);
                 return self.apply(this instanceof fNOP ? this : context, args.concat(bindArgs));
             }
-            fNOP.prototype = this.prototype;
+            fNOP.prototype = self.prototype;
             fBound.prototype = new fNOP();
             return fBound;
         }
